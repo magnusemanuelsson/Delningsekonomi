@@ -187,11 +187,11 @@ function initMap() {
 
 }
 
-function openNav() {
+function openBurger() {
     document.getElementById("mySidenav").style.width = "250px";
 }
 
-function closeNav() {
+function closeBurger() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
