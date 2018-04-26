@@ -13,10 +13,15 @@ namespace Delningsekonomi.Controllers
     {
         private PointsAPI service = new PointsAPI();
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
 
-            PointJSON pointsList = await service.GetPoints("63.8181", "20.3073", "1000", null);
+            if(cityLat == null || cityLng == null)
+            {
+                cityLat = "63.8181";
+                cityLng = "20.3073";
+            }
+            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, "1000", null);
             string jsonString = "{\"type\": \"FeatureCollection\",\"features\": [";
 
             foreach (var item in pointsList.resources)
@@ -30,7 +35,8 @@ namespace Delningsekonomi.Controllers
             jsonString = jsonString + "]}";
             System.Diagnostics.Debug.WriteLine(jsonString);
             System.Diagnostics.Debug.WriteLine("Hej");
-            ViewBag.APIstring = jsonString;
+            ViewBag.Lat = cityLat;
+            ViewBag.Lng = cityLng;
 
             return View("Index", model: jsonString);
         }

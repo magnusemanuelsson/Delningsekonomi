@@ -9,9 +9,17 @@
     Layout = "~/Views/Shared/MapLayout.cshtml";
 }
 @Html.Partial("Topmenu")
+@using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
+{
+    <input type="hidden" id="city2" name="city2" />
+    <input type="hidden" id="cityLat" name="cityLat" />
+    <input type="hidden" id="cityLng" name="cityLng" />
+}
 <div id="map" class="map"></div>
 <script>
     var myAPIpoints = @Html.Raw(Model);
+    var startLat = @ViewBag.Lat;
+    var startLng = @ViewBag.Lng;
 </script>
 <script src="~/Scripts/MapApp.js"></script>
 <script async defer

@@ -108,6 +108,8 @@ const mapStyle = [
 ];
 
 function initialize() {
+    currentLat = startLat;
+    currentLong = startLng;
     initMap();
     initAutocomplete();
 }
@@ -132,7 +134,7 @@ function initMap() {
 
     // Create the map.
     map = new google.maps.Map(document.getElementsByClassName('map')[0], {
-        zoom: 16,
+        zoom: 14,
         center: { lat: currentLat, lng: currentLong },
         styles: mapStyle,
         zoomControl: false,
@@ -193,16 +195,16 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-var currentLat = 63.818077;
-var currentLong = 20.307276;
+var currentLat;
+var currentLong;
 
 function initAutocomplete() {
 
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    var searchBox = new google.maps.places.Autocomplete(input);
+    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function () {
@@ -216,6 +218,23 @@ function initAutocomplete() {
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
+    //searchBox.addListener('places_changed', function () {
+    google.maps.event.addListener(searchBox, 'place_changed', function () {
+        var place = searchBox.getPlace();
+        document.getElementById('city2').value = place.name;
+        document.getElementById('cityLat').value = place.geometry.location.lat();
+        document.getElementById('cityLng').value = place.geometry.location.lng();
+        currentLat = place.geometry.location.lat();
+        currentLong = place.geometry.location.lng();
+        console.log("latitude: " + place.geometry.location.lat() + "  longitude: " + place.geometry.location.lng());
+        google.maps.event.addDomListener(window, 'load', initialize);
+        //var center = new google.maps.LatLng(currentLat, currentLong);
+        //map.panTo(center);
+        document.getElementById("form").submit();
+    });
+
+    
+    /*
     searchBox.addListener('places_changed', function () {
         var places = searchBox.getPlaces();
 
@@ -254,9 +273,15 @@ function initAutocomplete() {
                 bounds.extend(place.geometry.location);
                 currentLat = place.geometry.location.lat();
                 currentLong = place.geometry.location.lng();
+                console.log("" + currentLat);
+                consoloe.log("" + currentLong);
             }
         });
+
         map.fitBounds(bounds);
     });
+    */
+
+    
 
 }
