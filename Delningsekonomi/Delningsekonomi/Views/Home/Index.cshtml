@@ -1,7 +1,22 @@
-﻿@{
+﻿
+@model string
+@{
+    /**/
+
+    ViewBag.Title = "Home Page";
+}
+@{
     Layout = null;
 }
 @Html.Partial("Topmenu")
+<div id="map" class="map"></div>
+<script>
+    var myAPIpoints = @Html.Raw(Model);
+</script>
+<script src="~/Scripts/MapApp.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places&callback=initialize">
+</script>
 @Html.Partial("Bottommenu")
 
 

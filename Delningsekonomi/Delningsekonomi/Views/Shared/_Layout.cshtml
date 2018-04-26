@@ -6,6 +6,17 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #map {
+            height: calc(100vh - 100px);
+            width: 100vw;
+        }
+
+        .body-content {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

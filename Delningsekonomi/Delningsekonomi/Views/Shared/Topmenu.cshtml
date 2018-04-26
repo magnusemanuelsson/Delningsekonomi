@@ -7,14 +7,17 @@
     <style>
 
 
-        html{
+        html {
             padding: 0;
             margin: 0;
             top: 0;
             height: 0px;
         }
 
-
+        body {
+            display: block;
+            margin: 0px;
+        }
 
 
         #pac-input {
@@ -28,8 +31,8 @@
 
         }
 
-            #pac-input:focus {
-            }
+        #pac-input:focus {
+        }
 
 
         .sidenav {
@@ -45,26 +48,26 @@
             padding-top: 60px;
         }
 
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
 
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                }
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
 
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
 
         #toplogin {
             top: 0;
@@ -72,6 +75,7 @@
             width: 100%;
             background-color: aqua;
         }
+
         #menu {
             background-color: black;
             position: fixed;
@@ -81,11 +85,12 @@
             top: 0;
             margin: 0;
             padding: 0;
-            left:0;
-            overflow:hidden;
-            display:inline-block;
+            left: 0;
+            display: inline-block;
+            z-index: 100;
         }
-        #left{
+
+        #left {
             float: left;
             width: 50px;
             background-color: green;
@@ -95,6 +100,7 @@
             width: 100%;
             background-color: mediumpurple;
         }
+
         #hamburger {
             font-size: 30px;
             cursor: pointer;
@@ -102,6 +108,17 @@
             width: 12%;
             float: left;
             text-align:center;
+        }
+
+        #map {
+            margin-top: 62px;
+            height: calc(100vh - 100px);
+            width: 100vw;
+        }
+
+        .body-content {
+            padding: 0;
+            margin: 0;
         }
     </style>
 </head>
@@ -124,38 +141,7 @@
     <div id="menu">
             <div id="hamburger" onclick="openNav()">&#9776;</div>
             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        </div>
     </div>
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-
-        function initAutocomplete() {
-
-
-            // Create the search box and link it to the UI element.
-            var input = document.getElementById('pac-input');
-            var searchBox = new google.maps.places.SearchBox(input);
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-            // Bias the SearchBox results towards current map's viewport.
-            map.addListener('bounds_changed', function () {
-                searchBox.setBounds(map.getBounds());
-            });
-
-            var bounds = new google.maps.LatLngBounds();
-
-            map.fitBounds(bounds);
-
-        }
-
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATF4CDIxPTPUIezeGFQ3mPx2p0O-k7HEM
-&libraries=places&callback=initAutocomplete"
-            async defer></script>
 </body>
 </html>
