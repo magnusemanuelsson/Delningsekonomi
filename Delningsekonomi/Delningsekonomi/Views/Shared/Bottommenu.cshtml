@@ -39,10 +39,10 @@
 
             .bottom-menu .closebtn {
                 position: absolute;
-                top: 0;
+                bottom: 0;
                 right: 25px;
                 font-size: 36px;
-                margin-left: 50px;
+                margin-right: 50px;
             }
         body {
             margin: 0;
@@ -82,10 +82,24 @@
     </style>
 </head>
 <body>
-    <div 
+    <div id="bottom-menu">
+        
+           
+            <p> Namn på den inloggade</p>
+            <p> Email på den inloggade</p>
+        
+        <a href="#">Log Out</a>
+        <a href="#">Offers & Requests</a>
+        <a href="#">Settings</a>
+        <a href="#">Help</a>
+        <a href="#">Send Feedback</a>
+
+    </div>
+
+
     <div class="icon-bar  collapsible">
-        <div class="bottom-menu" id="bottom-menu">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+        <div>
+            <a href="javascript:void(0)" onclick="openNav()">
                 <i class="fa fa-home">
 
                 </i>
@@ -101,7 +115,7 @@
         }
 
         function closeNav() {
-            document.getElementById("bottom-menu").style.height = "0";
+            document.getElementById("bottom-menu").style.height = "0px";
         }
     </script>
 </body>
