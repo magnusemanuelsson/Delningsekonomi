@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#tooltip h2 {
+    font-size: 32px;
+}
+
+#tooltip p {
+    font-size: 16px;
+}
