@@ -193,8 +193,8 @@ function initMap() {
     });
 
     const apiKey = 'AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU';
-    var maxWidthResponsive = 100vw;
-    const infoWindow = new google.maps.InfoWindow({ maxWidth: 75vw });
+    var maxWidthResponsive = 100;
+    const infoWindow = new google.maps.InfoWindow({ maxWidth: 400 });
     infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -64) });
 
     // Show the information for a store when its marker is clicked.
@@ -239,9 +239,13 @@ function initAutocomplete() {
     var searchBox = new google.maps.places.Autocomplete(input);
 
     // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function () {
-    searchBox.setBounds(map.getBounds());
-    });
+    if (map != null)
+    {
+        map.addListener('bounds_changed', function () {
+            searchBox.setBounds(map.getBounds());
+        });
+    }
+    
     
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
