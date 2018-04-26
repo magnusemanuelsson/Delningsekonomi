@@ -21,8 +21,10 @@
             background-color: #fff;
             font-family: Roboto;
             font-size: 15px;
-            width: 100%;
+            width: 78%;
             padding:0;
+            margin-top: 2px;
+            height:30px;
 
         }
 
@@ -80,7 +82,8 @@
             margin: 0;
             padding: 0;
             left:0;
-            display:inline-block;§
+            overflow:hidden;
+            display:inline-block;
         }
         #left{
             float: left;
@@ -88,6 +91,7 @@
             background-color: green;
         }
         #righ{
+            float:right;
             width: 100%;
             background-color: mediumpurple;
         }
@@ -95,7 +99,9 @@
             font-size: 30px;
             cursor: pointer;
             color: white;
+            width: 12%;
             float: left;
+            text-align:center;
         }
     </style>
 </head>
@@ -116,12 +122,8 @@
 
 
     <div id="menu">
-        <div id="left">
             <span id="hamburger" onclick="openNav()">&#9776;</span>
-        </div>
-        <div id="right">
             <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        </div>
     </div>
     <script>
         function openNav() {
