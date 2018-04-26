@@ -41,6 +41,24 @@ namespace Delningsekonomi.Controllers
             return View("Index", model: jsonString);
         }
 
+        public async Task<ActionResult> ListView(string city2, string cityLat, string cityLng)
+        {
+
+            if (cityLat == null || cityLng == null)
+            {
+                cityLat = "63.8181";
+                cityLng = "20.3073";
+            }
+            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, "1000", null);
+            
+            System.Diagnostics.Debug.WriteLine(pointsList);
+            ViewBag.Lat = cityLat;
+            ViewBag.Lng = cityLng;
+
+            return View("ListView", model: pointsList.resources);
+        }
+
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

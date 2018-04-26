@@ -1,0 +1,40 @@
+﻿@model List<GMapsAPITest.Models.Resource>
+
+@{
+    ViewBag.Title = "ListView";
+}
+@{
+    Layout = "~/Views/Shared/MapLayout.cshtml";
+}
+@Html.Partial("Topmenu")
+
+<h2>ListView</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
+{
+    <input type="hidden" id="city2" name="city2" />
+    <input type="hidden" id="cityLat" name="cityLat" />
+    <input type="hidden" id="cityLng" name="cityLng" />
+}
+@foreach (var item in Model)
+{
+    <div id="list" class="list">
+        @Html.DisplayFor(itemModel => item.Title)
+        @Html.DisplayFor(itemModel => item.Description)
+        @Html.DisplayFor(itemModel => item.Image)
+        @Html.DisplayFor(itemModel => item.Tags)
+        @Html.DisplayFor(itemModel => item.Location)
+
+    </div>
+}
+
+<script>
+    var myAPIpoints = @Html.Raw(Model);
+    var startLat = @ViewBag.Lat;
+    var startLng = @ViewBag.Lng;
+</script>
+<script src="~/Scripts/MapApp.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places&callback=initAutocomplete">
+</script>
+
