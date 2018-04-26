@@ -107,9 +107,14 @@ const mapStyle = [
     }
 ];
 
+var currentLat;
+var currentLong;
+var currentRadius;
+
 function initialize() {
     currentLat = startLat;
     currentLong = startLng;
+    currentRadius = startRadius;
     initMap();
     initAutocomplete();
 }
@@ -145,6 +150,34 @@ function initMap() {
         fullscreenControl: false
     });
 
+    var centerCircle = new google.maps.Circle({
+        center: new google.maps.LatLng(currentLat, currentLong),
+        strokeColor: 'DeepSkyBlue',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillOpacity: 0, 
+        radius: currentRadius,
+        map: map,
+        zIndex: -1001
+    });
+
+    var centerMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(currentLat, currentLong),
+        icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            strokeColor: 'White',
+            fillColor: 'DeepSkyBlue',
+            fillOpacity: 1,
+            strokeWeight: 2
+        },
+        draggable: false,
+        map: map,
+        zIndex: -1000
+    });
+
+    map.fitBounds(centerCircle.getBounds());
+
     // Load the stores GeoJSON onto the map.
     // map.data.loadGeoJson('Scripts/points.json');
     map.data.addGeoJson(myAPIpoints);
@@ -154,14 +187,15 @@ function initMap() {
         return {
             icon: {
                 url: `Images/${feature.getProperty('category')}.png`,
-                scaledSize: new google.maps.Size(128, 128)
+                scaledSize: new google.maps.Size(64, 64)
             }
         };
     });
 
     const apiKey = 'AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU';
-    const infoWindow = new google.maps.InfoWindow({ maxWidth: 600 });
-    infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -128) });
+    var maxWidthResponsive = 100vw;
+    const infoWindow = new google.maps.InfoWindow({ maxWidth: 75vw });
+    infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -64) });
 
     // Show the information for a store when its marker is clicked.
     map.data.addListener('click', event => {
@@ -195,8 +229,7 @@ function closeBurger() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-var currentLat;
-var currentLong;
+
 
 function initAutocomplete() {
 
@@ -204,21 +237,15 @@ function initAutocomplete() {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.Autocomplete(input);
-    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function () {
     searchBox.setBounds(map.getBounds());
     });
-
-    //var bounds = new google.maps.LatLngBounds();
-    //var places = searchBox.getPlaces();
-
-    //map.fitBounds(bounds);
+    
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
-    //searchBox.addListener('places_changed', function () {
     google.maps.event.addListener(searchBox, 'place_changed', function () {
         var place = searchBox.getPlace();
         document.getElementById('city2').value = place.name;
@@ -228,60 +255,6 @@ function initAutocomplete() {
         currentLong = place.geometry.location.lng();
         console.log("latitude: " + place.geometry.location.lat() + "  longitude: " + place.geometry.location.lng());
         google.maps.event.addDomListener(window, 'load', initialize);
-        //var center = new google.maps.LatLng(currentLat, currentLong);
-        //map.panTo(center);
         document.getElementById("form").submit();
     });
-
-    
-    /*
-    searchBox.addListener('places_changed', function () {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
-            return;
-        }
-        console.log("places: " + places.length);
-
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function (place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-                currentLat = place.geometry.location.lat();
-                currentLong = place.geometry.location.lng();
-                console.log("" + currentLat);
-                consoloe.log("" + currentLong);
-            }
-        });
-
-        map.fitBounds(bounds);
-    });
-    */
-
-    
-
 }
