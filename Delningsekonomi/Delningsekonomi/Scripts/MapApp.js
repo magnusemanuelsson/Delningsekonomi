@@ -145,12 +145,6 @@ function initMap() {
 
     // Load the stores GeoJSON onto the map.
     // map.data.loadGeoJson('Scripts/points.json');
-    //var geojson = JSON.parse(JSON.stringify(myAPIpoints));
-    //var test1 = { "type": "FeatureCollection", "features": [{ "geometry": { "type": "Point", "coordinates": [20.263, 63.8258] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "", "name": "Böleäng", "phone": "N/A" } }, { "geometry": { "type": "Point", "coordinates": [20.2649, 63.827] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "", "name": "Hej Vestman", "phone": "N/A" } }, { "geometry": { "type": "Point", "coordinates": [20.2632, 63.8264] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "", "name": "MIS-plats", "phone": "N/A" } }, { "geometry": { "type": "Point", "coordinates": [20.3078, 63.8202] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "", "name": "Plats", "phone": "N/A" } }, { "geometry": { "type": "Point", "coordinates": [20.2632, 63.8264] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "Vi har två platser på Försäkringsfabriken som är bokningsbara för timanställda stansare.", "name": "Stansplats", "phone": "N/A" } }, { "geometry": { "type": "Point", "coordinates": [20.263, 63.8258] }, "type": "Feature", "properties": { "category": "FoodPurchaseOffered", "hours": "N/A", "description": "", "name": "Visit Umeå", "phone": "N/A" } }] }
-    //console.log(JSON.parse(myAPIpoints.replace(/&quot;/g, '"')));
-    //console.log(test1);
-
-    //map.data.addGeoJson(JSON.parse(myAPIpoints.replace(/&quot;/g, '"')));
     map.data.addGeoJson(myAPIpoints);
 
     // Define the custom marker icons, using the store's "category".

@@ -1,147 +1,20 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Places Searchbox</title>
-    <style>
-
-
-        html {
-            padding: 0;
-            margin: 0;
-            top: 0;
-            height: 0px;
-        }
-
-        body {
-            display: block;
-            margin: 0px;
-        }
-
-
-        #pac-input {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 15px;
-            width: 78%;
-            padding:0;
-            margin-top: 2px;
-            height:30px;
-
-        }
-
-        #pac-input:focus {
-        }
-
-
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        #toplogin {
-            top: 0;
-            height: 250px;
-            width: 100%;
-            background-color: aqua;
-        }
-
-        #menu {
-            background-color: black;
-            position: fixed;
-            width: 100%;
-            height: auto;
-            opacity: 0.7;
-            top: 0;
-            margin: 0;
-            padding: 0;
-            left: 0;
-            display: inline-block;
-            z-index: 100;
-        }
-
-        #left {
-            float: left;
-            width: 50px;
-            background-color: green;
-        }
-        #righ{
-            float:right;
-            width: 100%;
-            background-color: mediumpurple;
-        }
-
-        #hamburger {
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
-            width: 12%;
-            float: left;
-            text-align:center;
-        }
-
-        #map {
-            margin-top: 62px;
-            height: calc(100vh - 100px);
-            width: 100vw;
-        }
-
-        .body-content {
-            padding: 0;
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-    <div id="mySidenav" class="sidenav">
-        <div id="toplogin">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <p> Namn på den inloggade</p>
-            <p> Email på den inloggade</p>
-        </div>
-        <a href="#">Log Out</a>
-        <a href="#">Offers & Requests</a>
-        <a href="#">Settings</a>
-        <a href="#">Help</a>
-        <a href="#">Send Feedback</a>
-
+﻿<div id="mySidenav" class="sidenav">
+    <div id="toplogin">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <p> Namn på den inloggade</p>
+        <p> Email på den inloggade</p>
     </div>
+    <a href="#">Log Out</a>
+    <a href="#">Offers & Requests</a>
+    <a href="#">Settings</a>
+    <a href="#">Help</a>
+    <a href="#">Send Feedback</a>
+
+</div>
 
 
-    <div id="menu">
-            <span id="hamburger" onclick="openNav()">&#9776;</span>
-            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        </div>
-    </div>
-</body>
-</html>
+<div id="menu">
+    <span id="hamburger" onclick="openNav()">&#9776;</span>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+</div>
+</div>
