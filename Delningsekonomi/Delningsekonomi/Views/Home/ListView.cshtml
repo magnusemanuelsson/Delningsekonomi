@@ -8,7 +8,6 @@
 }
 @Html.Partial("Topmenu")
 
-<h2>ListView</h2>
 
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
 {
@@ -21,19 +20,49 @@
     <div id="list" class="list">
         @Html.DisplayFor(itemModel => item.Title)
         @Html.DisplayFor(itemModel => item.Description)
-        @Html.DisplayFor(itemModel => item.Image)
+
+        <img src="@Html.DisplayFor(itemModel => item.Image)" />
         @Html.DisplayFor(itemModel => item.Tags)
         @Html.DisplayFor(itemModel => item.Location)
 
+        <p id="distext">Distance: </p>
+
+        <script>
+            var currentlat = "@item.Location.Latitude";
+            var currentlong = "@item.Location.Longitude";
+            var startLat = "@ViewBag.Lat";
+        var startLng = "@ViewBag.Lng";
+            var currentpos = {
+                lat: currentlat,
+                lng: currentlong
+            };
+        </script>
+
     </div>
 }
+
 <div id="map" class="map"></div>
-<script>
-    var startLat = @ViewBag.Lat;
-    var startLng = @ViewBag.Lng;
-</script>
+
 <script src="~/Scripts/MapApp.js"></script>
+
+
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places&callback=initAutocomplete">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places,geometry&callback=initAutocomplete">
+</script>
+
+<script>
+    (function () {
+
+        var startpos = {
+            lat: startLat,
+            lng: startLng
+        };
+
+
+        var textbox = document.getElementById("distext").innerHTML;
+
+        textbox += "test";
+        textbox += getDistance(startpos, currentpos);
+    })();
 </script>
 
