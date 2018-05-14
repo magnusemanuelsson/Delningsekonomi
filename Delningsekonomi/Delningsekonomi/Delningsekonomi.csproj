@@ -197,6 +197,7 @@
     <Content Include="Views\Shared\MapLayout.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Home\ListView.cshtml" />
+    <Content Include="Views\Shared\ListLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
