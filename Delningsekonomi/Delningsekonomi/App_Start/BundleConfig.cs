@@ -5,6 +5,7 @@ namespace Delningsekonomi
 {
     public class BundleConfig
     {
+        
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
@@ -26,6 +27,8 @@ namespace Delningsekonomi
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

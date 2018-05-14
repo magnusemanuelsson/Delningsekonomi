@@ -8,6 +8,23 @@
 }
 @Html.Partial("Topmenu")
 
+<script>
+    var rad = function (x) {
+        return x * Math.PI / 180;
+    };
+
+    var getDistance = function (p1, p2) {
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = rad(p2.lat - p1.lat);
+        var dLong = rad(p2.lng - p1.lng);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d; // returns the distance in meter
+    };
+</script>
 
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
 {
@@ -15,6 +32,7 @@
     <input type="hidden" id="cityLat" name="cityLat" />
     <input type="hidden" id="cityLng" name="cityLng" />
 }
+<script>var counter = 0;</script>
 @foreach (var item in Model)
 {
     <div id="list" class="list">
@@ -25,17 +43,24 @@
         @Html.DisplayFor(itemModel => item.Tags)
         @Html.DisplayFor(itemModel => item.Location)
 
-        <p id="distext">Distance: </p>
+        <div id="distext">Distance: </div>
 
         <script>
-            var currentlat = "@item.Location.Latitude";
-            var currentlong = "@item.Location.Longitude";
-            var startLat = "@ViewBag.Lat";
-        var startLng = "@ViewBag.Lng";
             var currentpos = {
-                lat: currentlat,
-                lng: currentlong
+                lat: @ViewBag.Lat,
+                lng: @ViewBag.Lng
             };
+
+            var startpos = {
+                lat: @item.Location.Latitude,
+                lng: @item.Location.Longitude
+            };
+
+            document.getElementById("distext").id = "distext" + counter;
+            var textbox = document.getElementById("distext" + counter);
+            textbox.innerHTML += getDistance(startpos, currentpos);
+            counter++;
+            
         </script>
 
     </div>
@@ -50,19 +75,5 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places,geometry&callback=initAutocomplete">
 </script>
 
-<script>
-    (function () {
 
-        var startpos = {
-            lat: startLat,
-            lng: startLng
-        };
-
-
-        var textbox = document.getElementById("distext").innerHTML;
-
-        textbox += "test";
-        textbox += getDistance(startpos, currentpos);
-    })();
-</script>
 
