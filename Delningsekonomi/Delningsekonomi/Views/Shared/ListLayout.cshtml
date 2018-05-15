@@ -1,0 +1,172 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Places Searchbox</title>
+    <style>
+
+
+        html {
+            padding: 0;
+            margin: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        body {
+            display: block;
+            margin: 0px;
+            height: 100%;
+        }
+
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            width: 78%;
+            padding: 0;
+            margin-top: 2px;
+            height: 30px;
+        }
+
+        #pac-input:focus {
+        }
+
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #toplogin {
+            top: 0;
+            height: 250px;
+            width: 100%;
+            background-color: aqua;
+        }
+
+        #menu {
+            background-color: black;
+            position: fixed;
+            width: 100%;
+            height: auto;
+            opacity: 0.7;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            display: inline-block;
+            z-index: 100;
+        }
+
+        #left {
+            float: left;
+            width: 50px;
+            background-color: green;
+        }
+
+        #righ {
+            float: right;
+            width: 100%;
+            background-color: mediumpurple;
+        }
+
+        #hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            width: 12%;
+            float: left;
+            text-align: center;
+        }
+
+        .body-content {
+            padding: 0;
+            margin: 0;
+        }
+
+        .list_content {
+            margin-top: 10%;
+            font-family: 'Roboto', sans-serif;
+            height: 90%;
+        }
+
+        .list {
+            padding: 20px;
+            clear: both;
+            border-left: solid 2px;
+            border-right: solid 2px;
+            border-bottom: solid 1px;
+            border-top: solid 1px;
+            border-color: lightgray;
+            height: 20%;
+        }
+
+        .list_title {
+            float: left;
+            display: inline-block;
+            width: 75%;
+            font-weight: bold;
+        }
+
+        .list_distance {
+            float: right;
+            display: inline-block;
+            width: 25%;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .list_desc {
+            float: left;
+            display: inline-block;
+            width: 75%;
+        }
+
+        .list_img img {
+            float: right;
+            display: inline-block;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+        @RenderBody()
+</body>
+</html>

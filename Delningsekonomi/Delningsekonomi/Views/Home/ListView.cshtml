@@ -4,12 +4,9 @@
     ViewBag.Title = "ListView";
 }
 @{
-    Layout = "~/Views/Shared/MapLayout.cshtml";
+    Layout = "~/Views/Shared/listLayout.cshtml";
 }
 @Html.Partial("Topmenu")
-<style>
-    
-</style>
 
 <script>
     var rad = function (x) {
@@ -36,20 +33,29 @@
     <input type="hidden" id="cityLng" name="cityLng" />
 }
 <script>var counter = 0;</script>
+<div id="list_content" class="list_content">
+    @foreach (var item in Model)
+    {
+        <div id="list" class="list">
+            <div class="list_title">
+                @Html.DisplayFor(itemModel => item.Title)
+            </div>
+            <div class="list_distance">
+                <div id="distext"></div>
+            </div>
+            <br />
+            <div class="list_desc">
+                @Html.DisplayFor(itemModel => item.Description)
+            </div>
+            <div class="list_img">
+                <img src="@Html.DisplayFor(itemModel => item.Image)" />
+            </div>
+            <div class="list_tags">
+                @Html.DisplayFor(itemModel => item.Tags)
+            </div>
+            
 
-@foreach (var item in Model)
-{
-<div id="list" class="list">
-    @Html.DisplayFor(itemModel => item.Tags)
-
-    @Html.DisplayFor(itemModel => item.Title)
-    @Html.DisplayFor(itemModel => item.Description)
-    <div id="distext">Distance: </div>
-
-    <img src="@Html.DisplayFor(itemModel => item.Image)" />
-
-
-    <script>
+            <script>
             var currentpos = {
                 lat: @ViewBag.Lat,
                 lng: @ViewBag.Lng
@@ -61,14 +67,21 @@
             };
 
             document.getElementById("distext").id = "distext" + counter;
-            var textbox = document.getElementById("distext" + counter);
-            textbox.innerHTML += getDistance(startpos, currentpos);
+                var textbox = document.getElementById("distext" + counter);
+                var value = Math.round(getDistance(startpos, currentpos));
+                if (value > 1000) {
+                    textbox.innerHTML += value/1000 + "km";
+                } else {
+                    textbox.innerHTML += value + "m";
+                }
+            
             counter++;
 
-    </script>
+            </script>
 
+        </div>
+    }
 </div>
-}
 
 <div id="map" class="map"></div>
 
