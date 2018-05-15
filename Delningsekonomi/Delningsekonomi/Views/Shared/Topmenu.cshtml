@@ -1,5 +1,8 @@
 ﻿<head>
     <link rel="stylesheet" type="text/css" href="~/Content/sidemenu.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <div id="mySidenav" class="sidenav">
@@ -27,11 +30,11 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 </div>
 <script>
-    function openBurger() {
-        document.getElementById("mySidenav").style.display = "block";
-    }
+    $("#hamburger").click(function () {
+        $("#mySidenav").animate({ left: '0' });
+    });
 
-    function closeBurger() {
-        document.getElementById("mySidenav").style.display = "none";
-    }
+    $(".closebtn").click(function () {
+        $("#mySidenav").animate({ left: '-100%' });
+    });
 </script>

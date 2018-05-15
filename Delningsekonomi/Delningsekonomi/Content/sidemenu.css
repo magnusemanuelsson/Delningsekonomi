@@ -36,94 +36,59 @@
 
 
 .sidenav {
-    height: 100%;
-    display: none;
-    width: 70%;
+    font-family: Roboto;
+    height: 100vh;
+    display: block;
+    width: 80vw;
     position: fixed;
     z-index: 2;
     top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
+    left: -100%;
+    background-color: lightgray;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 8px;
+    padding: 1vh;
+    padding-left: 2vh;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 3vh;
+    color: dimgray;
     display: block;
-    transition: 0.3s;
 }
 
 .sidenav a:hover {
-    color: #f1f1f1;
+    color: dimgray;
 }
 
 .sidenav .closebtn {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     position: absolute;
     top: 0;
-    font-size: 36px;
+    height: 10vh;
+    width: 10vh;
+    font-size: 10vh;
+    color: lightgray;
 }
-
-@media screen and (min-width: 800px) {
-    .sidenav {
-        width: 580px;
-    }
+.sidenav .closebtn:hover {
+    color: white;
 }
 
 #toplogin {
     top: 0;
-    height: 200px;
+    height: 25vh;
     width: 100%;
     position: relative;
-    background-color: aqua;
+    background-color: dimgray;
 }
-
-#loggaut {
-    background-color: aquamarine;
-}
-
-#email {
-    bottom: 0;
-    font-size: 5vw;
-    margin: 5px;
-    position: absolute;
-}
-#nameuser {
-    bottom: 10px;
-    font-size: 5vw;
-    margin-left: 5px;
-    position: absolute;
-}
-
-@media screen and (min-width: 800px) {
-    #email {
-        font-size: 40px;
-    }
-
-    #nameuser{
-        font-size: 50px;
-    }
-}
-@media screen and (max-width: 500px) {
-    #email {
-        font-size: 20px;
-    }
-
-    #nameuser {
-        font-size: 32px;
-    }
-}
-
 
 #avatardiv {
     position: absolute;
     right: 0;
-    height: 100px;
-    width: 100px;
-    margin: 5%;
+    height: 12vh;
+    width: 12vh;
+    margin: 4vh;
 }
 
 .avatar {
@@ -133,16 +98,31 @@
     border-radius: 50%;
 }
 
-#left {
-    float: left;
-    width: 50px;
-    background-color: green;
+#nameuser {
+    bottom: 4vh;
+    margin: 1vh;
+    margin-left: 2vh;
+    position: absolute;
+    font-size: 4vh;
+    color: white;
+    font-weight: bold;
 }
 
-#righ {
-    float: right;
-    width: 100%;
-    background-color: mediumpurple;
+#email {
+    bottom: 0;
+    margin: 1vh;
+    margin-left: 2vh;
+    position: absolute;
+    font-size: 3vh;
+    color: white;
+    font-weight: lighter;
+}
+
+#loggaut {
+    background-color: gray;
+}
+#loggaut a{
+    color: white;
 }
 
 
