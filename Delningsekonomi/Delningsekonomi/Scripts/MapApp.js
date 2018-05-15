@@ -221,16 +221,6 @@ function initMap() {
 
 }
 
-function openBurger() {
-    document.getElementById("mySidenav").style.display = "block";
-}
-
-function closeBurger() {
-    document.getElementById("mySidenav").style.display = "none";
-}
-
-
-
 function initAutocomplete() {
 
 
