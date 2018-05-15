@@ -23,10 +23,15 @@ textarea {
     max-width: 280px;
 }
 
+.gm-style .gm-style-iw {
+    width: 60vw;
+    height: 40vh;
+}
+
 #tooltip h2 {
-    font-size: 32px;
+    font-size: 10vh;
 }
 
 #tooltip p {
-    font-size: 16px;
+    font-size: 5vh;
 }
