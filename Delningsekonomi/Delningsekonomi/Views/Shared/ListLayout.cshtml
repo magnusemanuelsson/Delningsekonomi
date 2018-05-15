@@ -38,10 +38,10 @@
         .list {
             padding: 3vh;
             clear: both;
-            border-left: solid 2px;
-            border-right: solid 2px;
-            border-bottom: solid 1px;
-            border-top: solid 1px;
+            border-left: solid 0.5vh;
+            border-right: solid 0.5vh;
+            border-bottom: solid 0.25vh;
+            border-top: solid 0.25vh;
             border-color: lightgray;
             height: 16vh;
         }
@@ -50,6 +50,9 @@
             float: left;
             display: inline-block;
             width: 75%;
+            height:25%;
+            overflow: hidden;
+            font-size: 3vh;
             font-weight: bold;
         }
 
@@ -57,7 +60,10 @@
             float: right;
             display: inline-block;
             width: 25%;
+            height: 25%;
+            overflow: hidden;
             text-align: right;
+            font-size: 3vh;
             font-weight: bold;
         }
 
@@ -65,12 +71,16 @@
             float: left;
             display: inline-block;
             width: 75%;
+            max-height: 75%;
+            overflow: auto;
+            font-size: calc(1vw + 1vh + 1vmin);
         }
 
         .list_img img {
             float: right;
             display: inline-block;
-            height: 50px;
+            max-height: 12vh;
+            max-width: 20vw;
         }
     </style>
 </head>
