@@ -222,7 +222,7 @@ function initMap() {
 }
 
 function openBurger() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "70%";
 }
 
 function closeBurger() {

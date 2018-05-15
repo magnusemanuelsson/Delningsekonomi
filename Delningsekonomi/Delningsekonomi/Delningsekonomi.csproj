@@ -157,6 +157,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\avatar.png" />
     <Content Include="Images\CarServiceOffered.png" />
     <Content Include="Images\CarServiceWanted.png" />
     <Content Include="Images\FoodPurchaseOffered.png" />

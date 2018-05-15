@@ -7,6 +7,9 @@
     Layout = "~/Views/Shared/MapLayout.cshtml";
 }
 @Html.Partial("Topmenu")
+<style>
+    
+</style>
 
 <script>
     var rad = function (x) {
@@ -33,19 +36,20 @@
     <input type="hidden" id="cityLng" name="cityLng" />
 }
 <script>var counter = 0;</script>
+
 @foreach (var item in Model)
 {
-    <div id="list" class="list">
-        @Html.DisplayFor(itemModel => item.Title)
-        @Html.DisplayFor(itemModel => item.Description)
+<div id="list" class="list">
+    @Html.DisplayFor(itemModel => item.Tags)
 
-        <img src="@Html.DisplayFor(itemModel => item.Image)" />
-        @Html.DisplayFor(itemModel => item.Tags)
-        @Html.DisplayFor(itemModel => item.Location)
+    @Html.DisplayFor(itemModel => item.Title)
+    @Html.DisplayFor(itemModel => item.Description)
+    <div id="distext">Distance: </div>
 
-        <div id="distext">Distance: </div>
+    <img src="@Html.DisplayFor(itemModel => item.Image)" />
 
-        <script>
+
+    <script>
             var currentpos = {
                 lat: @ViewBag.Lat,
                 lng: @ViewBag.Lng
@@ -60,10 +64,10 @@
             var textbox = document.getElementById("distext" + counter);
             textbox.innerHTML += getDistance(startpos, currentpos);
             counter++;
-            
-        </script>
 
-    </div>
+    </script>
+
+</div>
 }
 
 <div id="map" class="map"></div>
