@@ -222,11 +222,11 @@ function initMap() {
 }
 
 function openBurger() {
-    document.getElementById("mySidenav").style.width = "70%";
+    document.getElementById("mySidenav").style.display = "block";
 }
 
 function closeBurger() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.display = "none";
 }
 
 
