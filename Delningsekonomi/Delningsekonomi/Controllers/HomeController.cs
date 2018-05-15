@@ -12,15 +12,32 @@ namespace Delningsekonomi.Controllers
     public class HomeController : Controller
     {
         private PointsAPI service = new PointsAPI();
+        
 
         public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
             string radius = "1000";
-            if(cityLat == null || cityLng == null)
+
+            if (cityLat == null || cityLng == null)
             {
-                cityLat = "63.8181";
-                cityLng = "20.3073";
+                if (Session["sessionlat"] == null || Session["sessionlng"] == null)
+                {
+                    cityLat = "63.8181";
+                    cityLng = "20.3073";
+                }
+                else
+                {
+                    cityLat = (string)Session["sessionlat"];
+                    cityLng = (string)Session["sessionlng"];
+                }
             }
+            else
+            {
+                Session["sessionlat"] = cityLat;
+                Session["sessionlng"] = cityLng;
+                Session["sessioncity"] = city2;
+            }
+
             PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius, null);
             string jsonString = "{\"type\": \"FeatureCollection\",\"features\": [";
 
@@ -47,8 +64,22 @@ namespace Delningsekonomi.Controllers
 
             if (cityLat == null || cityLng == null)
             {
-                cityLat = "63.8181";
-                cityLng = "20.3073";
+                if (Session["sessionlat"] == null || Session["sessionlng"] == null)
+                {
+                    cityLat = "63.8181";
+                    cityLng = "20.3073";
+                }
+                else
+                {
+                    cityLat = (string) Session["sessionlat"];
+                    cityLng = (string) Session["sessionlng"];
+                }
+            }
+            else
+            {
+                Session["sessionlat"] = cityLat;
+                Session["sessionlng"] = cityLng;
+                Session["sessioncity"] = city2;
             }
             PointJSON pointsList = await service.GetPoints(cityLat, cityLng, "1000", null);
             
