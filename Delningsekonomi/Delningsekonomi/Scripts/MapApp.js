@@ -194,7 +194,7 @@ function initMap() {
 
     const apiKey = 'AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU';
     var maxWidthResponsive = 100;
-    const infoWindow = new google.maps.InfoWindow({ maxWidth: 400 });
+    const infoWindow = new google.maps.InfoWindow();
     infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -64) });
 
     // Show the information for a store when its marker is clicked.
@@ -219,6 +219,9 @@ function initMap() {
         infoWindow.open(map);
     });
 
+    google.maps.event.addDomListener(window, 'resize', function () {
+        infoWindow.open(map);
+    });
 }
 
 function initAutocomplete() {
