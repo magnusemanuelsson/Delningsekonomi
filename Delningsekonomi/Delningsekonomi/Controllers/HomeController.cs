@@ -2,6 +2,7 @@
 using GMapsAPITest.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -82,14 +83,50 @@ namespace Delningsekonomi.Controllers
                 Session["sessioncity"] = city2;
             }
             PointJSON pointsList = await service.GetPoints(cityLat, cityLng, "1000", null);
-            
             System.Diagnostics.Debug.WriteLine(pointsList);
+
+            foreach (Resource item in pointsList.resources)
+            {
+                string distancetopoint = Distance(cityLng, cityLat, item.Location.Longitude, item.Location.Latitude);
+                item.Distance = distancetopoint;
+            }
+
+            PointJSON sortlist = new PointJSON();
+
+            sortlist.resources = pointsList.resources.OrderBy(o => double.Parse(o.Distance)).ToList();
+            
+
             ViewBag.Lat = cityLat;
             ViewBag.Lng = cityLng;
 
-            return View("ListView", model: pointsList.resources);
+            return View("ListView", model: sortlist.resources);
         }
 
+        public double Rad(double x)
+        {
+            
+
+            return (x * (Math.PI / 180));
+
+        }
+        
+        public string Distance(string longitude, string latitude, string pointlong, string pointlat)
+        {
+            System.Diagnostics.Debug.WriteLine(longitude);
+            double currentlong = double.Parse(longitude, CultureInfo.InvariantCulture);
+            double currentlat = double.Parse(latitude, CultureInfo.InvariantCulture);
+            double longpoint = double.Parse(pointlong, CultureInfo.InvariantCulture);
+            double latpoint = double.Parse(pointlat, CultureInfo.InvariantCulture);
+
+            int R = 6378137;
+            double dLat = Rad(latpoint - currentlat);
+            double dlong = Rad(longpoint - currentlong);
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) + Math.Cos(Rad(currentlat)) * Math.Cos(Rad(latpoint)) * Math.Sin(dlong / 2) * Math.Sin(dlong / 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            double d = R * c;
+            return d.ToString();
+
+        }
 
         public ActionResult About()
         {
