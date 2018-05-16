@@ -8,23 +8,7 @@
 }
 @Html.Partial("Topmenu")
 @Html.Partial("Bottommenulist")
-<script>/*
-    var rad = function (x) {
-        return x * Math.PI / 180;
-    };
 
-    var getDistance = function (p1, p2) {
-        var R = 6378137; // Earth’s mean radius in meter
-        var dLat = rad(p2.lat - p1.lat);
-        var dLong = rad(p2.lng - p1.lng);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
-            Math.sin(dLong / 2) * Math.sin(dLong / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c;
-        return d; // returns the distance in meter
-    };*/
-</script>
 
 
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
@@ -37,28 +21,50 @@
 <div id="list_content" class="list_content">
     @foreach (var item in Model)
     {
-        <div id="list" class="list">
-            <div class="list_title">
-                @Html.DisplayFor(itemModel => item.Title)
-            </div>
-            <div class="list_distance">
-                @Html.DisplayFor(itemModel => item.Distance)
-            </div>
-            <br />
-            <div class="list_desc">
-                @Html.DisplayFor(itemModel => item.Description)
-            </div>
-            <div class="list_img">
-                <img src="@Html.DisplayFor(itemModel => item.Image)" />
-            </div>
-            <div class="list_tags">
-                @Html.DisplayFor(itemModel => item.Tags)
-            </div>
-
-
-            
-
+    <div id="list" class="list">
+        <div class="list_title">
+            @Html.DisplayFor(itemModel => item.Title)
         </div>
+        <div class="list_distance">
+            @Html.DisplayFor(itemModel => item.Distance)
+        </div>
+        <br />
+        <div class="list_desc">
+            @Html.DisplayFor(itemModel => item.Description)
+        </div>
+        <div class="list_img">
+            <img src="@Html.DisplayFor(itemModel => item.Image)" />
+        </div>
+        <div class="list_tags">
+            @Html.DisplayFor(itemModel => item.Tags)
+        </div>
+
+        <script>
+            var currentpos = {
+                lat: @ViewBag.Lat,
+                lng: @ViewBag.Lng
+            };
+
+            var startpos = {
+                lat: @item.Location.Latitude,
+                lng: @item.Location.Longitude
+            };
+
+            document.getElementById("distext").id = "distext" + counter;
+                var textbox = document.getElementById("distext" + counter);
+                var value = Math.round(getDistance(startpos, currentpos));
+                if (value > 1000) {
+                    textbox.innerHTML += value/1000 + "km";
+                } else {
+                    textbox.innerHTML += value + "m";
+                }
+
+            counter++;
+
+        </script>
+
+
+    </div>
     }
 </div>
 
