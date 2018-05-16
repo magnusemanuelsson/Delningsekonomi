@@ -3,6 +3,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .slidecontainer {
+            margin-top: 2vh;
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+    </style>
 </head>
 
 <div id="mySidenav" class="sidenav">
@@ -18,16 +61,38 @@
         <a href="#" class="textsidemenu">Log Out</a>
     </div>
     <a href="#" class="textsidemenu">Offers & Requests</a>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
     <a href="#" class="textsidemenu">Settings</a>
+    <div class="panel">
+        <div class="slidecontainer">
+            <form>
+
+                <input type="range" min="1" max="10000" value="5000" class="slider" id="myRange">
+                <p>Value: <span id="demo"></span> meter</p>
+                <input type="submit" value="Send" name="range" id="range"/>
+            </form>
+
+        </div>
+    </div>
+
     <a href="#" class="textsidemenu">Help</a>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
     <a href="#" class="textsidemenu">Send Feedback</a>
+    <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
 
 </div>
 
 
 <div id="menu">
     <span id="hamburger" onclick="openBurger()">&#9776;</span>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <input id="pac-input" class="controls" type="text" placeholder="  &#x1F50D; Your Position" onfocus="this.placeholder = ''" onblur="this.placeholder ='  &#x1F50D; Your Position'">
 </div>
 <script>
     $("#hamburger").click(function () {
@@ -37,4 +102,35 @@
     $(".closebtn").click(function () {
         $("#mySidenav").animate({ left: '-100%' });
     });
+</script>
+<script>
+    var acc = document.getElementsByClassName("textsidemenu");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+        @Session["range"] = slider.value;
+        console.log(slider.value);
+    }
+
+</script>
+<script>
+    console.log(document.document.getElementById("demo"));
+
 </script>

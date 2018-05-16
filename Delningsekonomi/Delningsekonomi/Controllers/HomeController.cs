@@ -17,7 +17,14 @@ namespace Delningsekonomi.Controllers
 
         public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
-            string radius = "1000";
+            string radius;
+            if(Session["range"] == null)
+            {
+                radius = "1000";
+            }
+            else { 
+                radius = (string) Session["range"];
+            }
 
             if (cityLat == null || cityLng == null)
             {
