@@ -25,7 +25,7 @@
         <div class="list_title">
             @Html.DisplayFor(itemModel => item.Title)
         </div>
-        <div class="list_distance">
+        <div class="list_distance" id="distext">
             @Html.DisplayFor(itemModel => item.Distance)
         </div>
         <br />
@@ -40,32 +40,20 @@
         </div>
 
         <script>
-            var currentpos = {
-                lat: @ViewBag.Lat,
-                lng: @ViewBag.Lng
-            };
-
-            var startpos = {
-                lat: @item.Location.Latitude,
-                lng: @item.Location.Longitude
-            };
-
             document.getElementById("distext").id = "distext" + counter;
-                var textbox = document.getElementById("distext" + counter);
-                var value = Math.round(getDistance(startpos, currentpos));
-                if (value > 1000) {
-                    textbox.innerHTML += value/1000 + "km";
-                } else {
-                    textbox.innerHTML += value + "m";
-                }
-
+            var textbox = document.getElementById("distext" + counter);
+            var value = Math.round(parseFloat(textbox.innerHTML));
+            if (value > 1000) {
+                textbox.innerHTML = value / 1000 + "km";
+            } else {
+                textbox.innerHTML = value + "m";
+            }
             counter++;
-
         </script>
-
 
     </div>
     }
+    <div id="list_spacer"></div>
 </div>
 
 <div id="map" class="map"></div>
