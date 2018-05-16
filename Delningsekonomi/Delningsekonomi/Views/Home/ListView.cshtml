@@ -8,7 +8,7 @@
 }
 @Html.Partial("Topmenu")
 @Html.Partial("Bottommenulist")
-<script>
+<script>/*
     var rad = function (x) {
         return x * Math.PI / 180;
     };
@@ -23,8 +23,9 @@
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
         return d; // returns the distance in meter
-    };
+    };*/
 </script>
+
 
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
 {
@@ -41,7 +42,7 @@
                 @Html.DisplayFor(itemModel => item.Title)
             </div>
             <div class="list_distance">
-                <div id="distext"></div>
+                @Html.DisplayFor(itemModel => item.Distance)
             </div>
             <br />
             <div class="list_desc">
@@ -53,31 +54,9 @@
             <div class="list_tags">
                 @Html.DisplayFor(itemModel => item.Tags)
             </div>
+
+
             
-
-            <script>
-            var currentpos = {
-                lat: @ViewBag.Lat,
-                lng: @ViewBag.Lng
-            };
-
-            var startpos = {
-                lat: @item.Location.Latitude,
-                lng: @item.Location.Longitude
-            };
-
-            document.getElementById("distext").id = "distext" + counter;
-                var textbox = document.getElementById("distext" + counter);
-                var value = Math.round(getDistance(startpos, currentpos));
-                if (value > 1000) {
-                    textbox.innerHTML += value/1000 + "km";
-                } else {
-                    textbox.innerHTML += value + "m";
-                }
-            
-            counter++;
-
-            </script>
 
         </div>
     }
