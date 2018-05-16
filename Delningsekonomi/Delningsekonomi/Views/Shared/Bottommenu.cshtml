@@ -53,8 +53,9 @@ $(document).ready(function () {
             height: 10vh;
             border: solid 2px;
             text-align: center;
-            position:relative;
-            border-color: lightgray;
+            position: relative;
+            background-color: dimgray;
+            border-color: gray;
         }
 
         #cat_filter {
@@ -73,7 +74,8 @@ $(document).ready(function () {
             vertical-align: middle;
         }
         .menubuttom {
-            width: 50px;
+            height: 8vh;
+            width: 8vh;
             top: 0;
             position: absolute;
             left: 0;
@@ -91,14 +93,14 @@ $(document).ready(function () {
         <div id="time_filter" class="bot-menu">
             <div id="time_button" class="buttons">
                 <div>
-                    <img src="~/Images/tidsikon.png" class="menubuttom" alt="Tid">
+                    <img src="~/Images/Time_Icon.png" class="menubuttom" alt="Tid">
                 </div>
             </div>
         </div>
         <div id="cat_filter" class="bot-menu">
             <div id="cat_button" class="buttons" onclick="CatButton()">
                 <div>
-                    <img src="~/Images/filterikon.png"  class="menubuttom" alt="Tid">
+                    <img src="~/Images/Filter_Icon.png"  class="menubuttom" alt="Tid">
                 </div>
             </div>
         </div>
@@ -107,7 +109,7 @@ $(document).ready(function () {
             <div onclick="MyFunction()" id="list_button" class="buttons">
                 <div>
                     <a href="@Url.Action("ListView", "Home")">
-                    <img src="~/Images/listikon.png" alt="Tid" class="menubuttom" href="~/Home/ListView.cshtml">
+                    <img src="~/Images/List_Icon.png" alt="Tid" class="menubuttom" href="~/Home/ListView.cshtml">
                     </a>
                  </div>
             </div>
