@@ -186,7 +186,7 @@ function initMap() {
     map.data.setStyle(feature => {
         return {
             icon: {
-                url: `Images/${feature.getProperty('category')}.png`,
+                url: `/Images/Pins/${feature.getProperty('category')}.png`,
                 scaledSize: new google.maps.Size(64, 64)
             }
         };

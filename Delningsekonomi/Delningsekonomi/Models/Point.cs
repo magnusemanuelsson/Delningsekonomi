@@ -41,7 +41,8 @@ namespace GMapsAPITest.Models
         public string Description { get; set; }
         [JsonProperty("image")]
         public string Image { get; set; }
-                public string Distance { get; set; }
+
+        public string Distance { get; set; }
 
 
     }
