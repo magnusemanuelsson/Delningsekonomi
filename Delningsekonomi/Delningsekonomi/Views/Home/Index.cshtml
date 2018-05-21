@@ -26,6 +26,9 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places&callback=initialize">
 </script>
-@Html.Partial("Bottommenu")
+@using (Html.BeginForm("FilterPost", "Home", FormMethod.Post, new { name = "filter", id = "filter", onSubmit = "return saveComment();" }))
+{
+    @Html.Partial("Bottommenu")
+}
 
 

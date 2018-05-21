@@ -118,7 +118,26 @@ $(document).ready(function () {
             tids-filter
         </div>
         <div id="cat_hidden" class="submenu">
-            kategori-filter
+            <input type="text" id="mytext" name="mytext" />
+            <input type="checkbox" value="Buy" id="filter_buy" name="filter_buy" /> Buy/Sell
+            <input type="checkbox" value="Rent" id="filter_rent" name="filter_rent" /> Rent
+            <input type="checkbox" value="Service" id="filter_service" name="filter_service" /> Service
+            <input type="checkbox" value="Food" id="filter_food" name="filter_food" /> Food
+            <input type="checkbox" value="Vehicle" id="filter_vehicle" name="filter_vehicle" /> Vehicle
+            <input type="checkbox" value="Misc" id="filter_misc" name="filter_misc" /> Misc
+            <input type="submit" value="Save" />
+            <script>
+                document.getElementById("filter_buy").value = localStorage.getItem("storage_filter_buy");
+
+                function saveComment() {
+                    var comment = document.getElementById("filter_buy").value;
+                    if (comment != null) {
+                        localStorage.setItem("storage_filter_buy", comment);
+                    }
+                    return true;
+                }
+            </script>
+            
         </div>
     </div>
 

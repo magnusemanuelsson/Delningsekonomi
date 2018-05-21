@@ -19,10 +19,11 @@ namespace Delningsekonomi.Controllers
     public class HomeController : Controller
     {
         private PointsAPI service = new PointsAPI();
-        
+        private List<string> filterList = new List<string>();
 
         public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
+
             string radius;
             if(Session["rangevalue"] == null)
             {
@@ -63,7 +64,8 @@ namespace Delningsekonomi.Controllers
                 mapPoints.Features[counter].Geometry.Coordinates[0] = float.Parse(item.Location.Longitude, CultureInfo.InvariantCulture);
                 mapPoints.Features[counter].Geometry.Coordinates[1] = float.Parse(item.Location.Latitude, CultureInfo.InvariantCulture);
                 mapPoints.Features[counter].Type = "Feature";
-                if(item.Tags != null && item.Tags[0] != null && item.Tags[1] != null && item.Tags[2] != null &&
+                if (item.Tags != null && item.Tags.Count >= 3 &&
+                    item.Tags[0] != null && item.Tags[1] != null && item.Tags[2] != null &&
                     (item.Tags[0] == "Orange" || item.Tags[0] == "Blue"))
                 {
                     mapPoints.Features[counter].Properties.Category = item.Tags[0] + item.Tags[1] + item.Tags[2];
@@ -81,22 +83,6 @@ namespace Delningsekonomi.Controllers
             }
 
             string jsonString = JsonConvert.SerializeObject(mapPoints);
-            /*
-            string jsonString = "{\"type\": \"FeatureCollection\",\"features\": [";
-
-            foreach (var item in pointsList.resources)
-            {
-                jsonString = jsonString + "{\"geometry\": {\"type\": \"Point\",\"coordinates\": [" + item.Location.Longitude.ToString() + "," + item.Location.Latitude.ToString() + "]},";
-                jsonString = jsonString + "\"type\": \"Feature\",\"properties\": { ";
-                jsonString = jsonString + "\"category\": \"FoodPurchaseOffered\",\"hours\": \"N/A\",\"description\": \"" + ((item.Description != null) ? item.Description.ToString() : "") + "\",\"name\": \"" + ((item.Title != null) ? item.Title.ToString() : "") + "\",\"phone\": \"N/A\"";
-                jsonString = jsonString + "}},";
-            }
-            jsonString = jsonString.TrimEnd(',');
-            jsonString = jsonString + "]}";
-            System.Diagnostics.Debug.WriteLine(jsonString);
-            System.Diagnostics.Debug.WriteLine("Hej");
-            */
-
 
             ViewBag.Lat = cityLat;
             ViewBag.Lng = cityLng;
@@ -148,7 +134,7 @@ namespace Delningsekonomi.Controllers
             PointJSON sortlist = new PointJSON();
 
             sortlist.resources = pointsList.resources.OrderBy(o => double.Parse(o.Distance)).ToList();
-            
+
 
             ViewBag.Lat = cityLat;
             ViewBag.Lng = cityLng;
@@ -158,12 +144,12 @@ namespace Delningsekonomi.Controllers
 
         public double Rad(double x)
         {
-            
+
 
             return (x * (Math.PI / 180));
 
         }
-        
+
         public string Distance(string longitude, string latitude, string pointlong, string pointlat)
         {
             System.Diagnostics.Debug.WriteLine(longitude);
@@ -203,7 +189,7 @@ namespace Delningsekonomi.Controllers
             var path2 = Path.Combine(dir, str2 + ".png");
             var path3 = Path.Combine(dir, str3 + ".png");
             var outpath = Path.Combine(dir, str1 + str2 + str3 + ".png");
-            Bitmap firstImage = (Bitmap) Image.FromFile(path1, true);
+            Bitmap firstImage = (Bitmap)Image.FromFile(path1, true);
             Bitmap secondImage = (Bitmap)Image.FromFile(path2, true);
             Bitmap thirdImage = (Bitmap)Image.FromFile(path3, true);
             Bitmap compImage1 = MergeThreeImages(firstImage, secondImage, thirdImage);
@@ -260,7 +246,7 @@ namespace Delningsekonomi.Controllers
 
             if (thirdImage == null)
             {
-                throw new ArgumentNullException("secondImage");
+                throw new ArgumentNullException("thirdImage");
             }
 
             int outputImageWidth = firstImage.Width;
@@ -289,6 +275,27 @@ namespace Delningsekonomi.Controllers
 
             return outputImage;
 
+        }
+
+        [HttpPost]
+        public ActionResult FilterPost(string mytext, bool filter_buy = false, bool filter_rent = false, bool filter_service = false, bool filter_food = false, bool filter_vehicle = false, bool filter_misc = false)
+        {
+            if (filter_buy)
+            {
+                if (!filterList.Contains("Buy"))
+                {
+                    filterList.Add("Buy");
+                }
+            }
+            else
+            {
+                if (filterList.Contains("Buy"))
+                {
+                    filterList.Remove("Buy");
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
