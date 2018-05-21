@@ -53,7 +53,7 @@ namespace Delningsekonomi.Controllers
                 Session["sessioncity"] = city2;
             }
 
-            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius, null);
+            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius, filterList);
 
             MapPoints mapPoints = new MapPoints(pointsList.resources.Count);
 
@@ -278,24 +278,36 @@ namespace Delningsekonomi.Controllers
         }
 
         [HttpPost]
-        public ActionResult FilterPost(string mytext, bool filter_buy = false, bool filter_rent = false, bool filter_service = false, bool filter_food = false, bool filter_vehicle = false, bool filter_misc = false)
+        public ActionResult FilterPost(bool Orange, bool Blue, bool Buy, bool Rent, bool Service, bool Food, bool Vehicle, bool Misc)
         {
-            if (filter_buy)
+            SetFilter(nameof(Orange), Orange);
+            SetFilter(nameof(Blue), Blue);
+            SetFilter(nameof(Buy), Buy);
+            SetFilter(nameof(Rent), Rent);
+            SetFilter(nameof(Service), Service);
+            SetFilter(nameof(Food), Food);
+            SetFilter(nameof(Vehicle), Vehicle);
+            SetFilter(nameof(Misc), Misc);
+
+            return RedirectToAction("Index");
+        }
+
+        public void SetFilter(string name, bool value)
+        {
+            if (value)
             {
-                if (!filterList.Contains("Buy"))
+                if (!filterList.Contains(name))
                 {
-                    filterList.Add("Buy");
+                    filterList.Add(name);
                 }
             }
             else
             {
-                if (filterList.Contains("Buy"))
+                if (filterList.Contains(name))
                 {
-                    filterList.Remove("Buy");
+                    filterList.Remove(name);
                 }
             }
-
-            return RedirectToAction("Index");
         }
     }
 }

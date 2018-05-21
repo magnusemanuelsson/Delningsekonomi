@@ -59,7 +59,7 @@ $(document).ready(function () {
         }
 
         #cat_filter {
-            width: 33vw;
+            width: 34vw;
         }
 
         .bot-menu .buttons div {
@@ -98,7 +98,7 @@ $(document).ready(function () {
             </div>
         </div>
         <div id="cat_filter" class="bot-menu">
-            <div id="cat_button" class="buttons" onclick="CatButton()">
+            <div id="cat_button" class="buttons">
                 <div>
                     <img src="~/Images/Filter_Icon.png"  class="menubuttom" alt="Tid">
                 </div>
@@ -106,7 +106,7 @@ $(document).ready(function () {
         </div>
         <div id="list" class="bot-menu">
 
-            <div onclick="MyFunction()" id="list_button" class="buttons">
+            <div id="list_button" class="buttons">
                 <div>
                     <a href="@Url.Action("ListView", "Home")">
                     <img src="~/Images/List_Icon.png" alt="Tid" class="menubuttom" href="~/Home/ListView.cshtml">
@@ -118,26 +118,28 @@ $(document).ready(function () {
             tids-filter
         </div>
         <div id="cat_hidden" class="submenu">
-            <input type="text" id="mytext" name="mytext" />
-            <input type="checkbox" value="Buy" id="filter_buy" name="filter_buy" /> Buy/Sell
-            <input type="checkbox" value="Rent" id="filter_rent" name="filter_rent" /> Rent
-            <input type="checkbox" value="Service" id="filter_service" name="filter_service" /> Service
-            <input type="checkbox" value="Food" id="filter_food" name="filter_food" /> Food
-            <input type="checkbox" value="Vehicle" id="filter_vehicle" name="filter_vehicle" /> Vehicle
-            <input type="checkbox" value="Misc" id="filter_misc" name="filter_misc" /> Misc
-            <input type="submit" value="Save" />
-            <script>
-                document.getElementById("filter_buy").value = localStorage.getItem("storage_filter_buy");
-
-                function saveComment() {
-                    var comment = document.getElementById("filter_buy").value;
-                    if (comment != null) {
-                        localStorage.setItem("storage_filter_buy", comment);
-                    }
-                    return true;
-                }
-            </script>
-            
+            <input type="checkbox" id="filter_orange" class="filterCheck" name="Orange" value="true" /> Offers
+            <input type="hidden" name="Orange" value="false" />
+            <input type="checkbox" id="filter_blue" class="filterCheck" name="Blue" value="true" /> Requests
+            <input type="hidden" name="Blue" value="false" />
+            <br />
+            <input type="checkbox" id="filter_buy" class="filterCheck" name="Buy" value="true" /> Buy & Sell
+            <input type="hidden" name="Buy" value="false" />
+            <input type="checkbox" id="filter_rent" class="filterCheck" name="Rent" value="true" /> Rent
+            <input type="hidden" name="Rent" value="false" />
+            <input type="checkbox" id="filter_service" class="filterCheck" name="Service" value="true" /> Service
+            <input type="hidden" name="Service" value="false" />
+            <br />
+            <input type="checkbox" id="filter_food" class="filterCheck" name="Food" value="true" /> Food
+            <input type="hidden" name="Food" value="false" />
+            <br />
+            <input type="checkbox" id="filter_vehicle" class="filterCheck" name="Vehicle" value="true" /> Vehicle
+            <input type="hidden" name="Vehicle" value="false" />
+            <br />
+            <input type="checkbox" id="filter_misc" class="filterCheck" name="Misc" value="true" /> Misc
+            <input type="hidden" name="Misc" value="false" />
+            <br />
+            <input type="submit" value="Save" onclick="save_data()" />
         </div>
     </div>
 

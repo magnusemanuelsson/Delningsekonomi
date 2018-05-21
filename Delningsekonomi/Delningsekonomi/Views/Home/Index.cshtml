@@ -26,9 +26,36 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places&callback=initialize">
 </script>
-@using (Html.BeginForm("FilterPost", "Home", FormMethod.Post, new { name = "filter", id = "filter", onSubmit = "return saveComment();" }))
+@using (Html.BeginForm("FilterPost", "Home", FormMethod.Post, new { name = "filter", id = "filter" }))
 {
     @Html.Partial("Bottommenu")
 }
+<script>
+    function save_data() {
+        var checkboxes = document.getElementsByClassName("filterCheck");
+        [].forEach.call(checkboxes, function (element) {
+            if (element.checked) {
+                localStorage.setItem(element.id, true);
+            }
+            else {
+                localStorage.setItem(element.id, false);
+            }
+        });
+        console.log("Saving Form");
+    }
+
+    function load_data() {
+        var checkboxes = document.getElementsByClassName("filterCheck");
+        [].forEach.call(checkboxes, function (element) {
+            if (localStorage.getItem(element.id) == "true") {
+                element.checked = true;
+            }
+        });
+        console.log("Loading form");
+    }
+
+    load_data();
+
+</script>
 
 

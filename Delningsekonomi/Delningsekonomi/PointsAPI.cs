@@ -14,20 +14,27 @@ namespace GMapsAPITest
 
         readonly string uri = "https://www.askvigg.com/api/v1.1/resources.json";
 
-        public async Task<PointJSON> GetPoints(string latitude, string longitude, string distance, string tags)
+        public async Task<PointJSON> GetPoints(string latitude, string longitude, string distance, List<string> tags)
         {
             if(distance == null)
             {
                 distance = "";
             }
-            if (tags == null)
+            if (tags.Count < 1)
             {
-                tags = "";
+                tags.Add("");
             }
 
             using (HttpClient httpClient = new HttpClient())
             {
-                string apistr = await httpClient.GetStringAsync(uri + "?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance + "&tags=" + tags);
+                string tagsStr = "";
+                foreach(string tag in tags)
+                {
+                    tagsStr += (tag + ",");
+                }
+                tagsStr = tagsStr.TrimEnd(',');
+                string test = uri + "?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance + "&tags=" + tagsStr;
+                string apistr = await httpClient.GetStringAsync(uri + "?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance + "&tags=" + tagsStr);
                 var returnval = JsonConvert.DeserializeObject<PointJSON>(apistr);
                 return returnval;
                 
