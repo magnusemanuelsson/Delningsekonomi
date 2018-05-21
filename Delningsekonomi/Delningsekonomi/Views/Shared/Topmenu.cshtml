@@ -67,15 +67,14 @@
 
     <a href="#" class="textsidemenu">Settings</a>
     <div class="panel">
+        @using (Html.BeginForm("slider", "Home"))
+    {
 
-@using (Html.BeginForm("slider", "Home"))
-{
-    @Html.TextBox("rangevalue", Session["rangevalue"])
+            <div class="form-control">@Html.TextBox("rangevalue", Session["rangevalue"])</div>
 
-    <input type="submit" value="Sök radie" />
+            <input type="submit" value="Sök radie" class="btn-primary" />
+
 }
-
-
 
     </div>
 

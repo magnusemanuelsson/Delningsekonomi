@@ -210,6 +210,13 @@ namespace Delningsekonomi.Controllers
             compImage1.Save(outpath, ImageFormat.Png);
         }
 
+        [HttpPost]
+        public ActionResult slider(FormCollection fc)
+        {
+            Session["rangevalue"] = fc["rangevalue"];
+            return RedirectToAction("Index");
+        }
+
         public static Bitmap MergeTwoImages(Image firstImage, Image secondImage)
         {
             if (firstImage == null)
@@ -281,12 +288,7 @@ namespace Delningsekonomi.Controllers
             }
 
             return outputImage;
-        }
-        [HttpPost]
-        public ActionResult slider(FormCollection fc)
-        {
-            Session["rangevalue"] = fc["rangevalue"];
-           return RedirectToAction("Index");
+
         }
     }
 }
