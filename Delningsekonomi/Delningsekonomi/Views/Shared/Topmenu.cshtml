@@ -67,15 +67,16 @@
 
     <a href="#" class="textsidemenu">Settings</a>
     <div class="panel">
-        <div class="slidecontainer">
-            <form>
 
-                <input type="range" min="1" max="10000" value="5000" class="slider" id="myRange">
-                <p>Value: <span id="demo"></span> meter</p>
-                <input type="submit" value="Send" name="range" id="range"/>
-            </form>
+@using (Html.BeginForm("slider", "Home"))
+{
+    @Html.TextBox("rangevalue", Session["rangevalue"])
 
-        </div>
+    <input type="submit" value="Sök radie" />
+}
+
+
+
     </div>
 
     <a href="#" class="textsidemenu">Help</a>
@@ -119,17 +120,7 @@
         });
     }
 </script>
-<script>
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value;
-    slider.oninput = function () {
-        output.innerHTML = this.value;
-        @Session["range"] = slider.value;
-        console.log(slider.value);
-    }
 
-</script>
 <script>
     console.log(document.document.getElementById("demo"));
 

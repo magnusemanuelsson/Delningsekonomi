@@ -18,12 +18,12 @@ namespace Delningsekonomi.Controllers
         public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
             string radius;
-            if(Session["range"] == null)
+            if(Session["rangevalue"] == null)
             {
                 radius = "1000";
             }
             else { 
-                radius = (string) Session["range"];
+                radius = (string) Session["rangevalue"];
             }
 
             if (cityLat == null || cityLng == null)
@@ -69,6 +69,15 @@ namespace Delningsekonomi.Controllers
 
         public async Task<ActionResult> ListView(string city2, string cityLat, string cityLng)
         {
+            string radius;
+            if (Session["rangevalue"] == null)
+            {
+                radius = "1000";
+            }
+            else
+            {
+                radius = (string)Session["rangevalue"];
+            }
 
             if (cityLat == null || cityLng == null)
             {
@@ -79,8 +88,8 @@ namespace Delningsekonomi.Controllers
                 }
                 else
                 {
-                    cityLat = (string) Session["sessionlat"];
-                    cityLng = (string) Session["sessionlng"];
+                    cityLat = (string)Session["sessionlat"];
+                    cityLng = (string)Session["sessionlng"];
                 }
             }
             else
@@ -89,7 +98,7 @@ namespace Delningsekonomi.Controllers
                 Session["sessionlng"] = cityLng;
                 Session["sessioncity"] = city2;
             }
-            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, "1000", null);
+            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius , null);
             System.Diagnostics.Debug.WriteLine(pointsList);
 
             foreach (Resource item in pointsList.resources)
@@ -147,6 +156,12 @@ namespace Delningsekonomi.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        [HttpPost]
+        public ActionResult slider(FormCollection fc)
+        {
+            Session["rangevalue"] = fc["rangevalue"];
+           return RedirectToAction("Index");
         }
     }
 }
