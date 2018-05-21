@@ -24,27 +24,27 @@
             transition: opacity .2s;
         }
 
-            .slider:hover {
-                opacity: 1;
-            }
+        .slider:hover {
+            opacity: 1;
+        }
 
-            .slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 25px;
-                height: 25px;
-                border-radius: 50%;
-                background: #4CAF50;
-                cursor: pointer;
-            }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
 
-            .slider::-moz-range-thumb {
-                width: 25px;
-                height: 25px;
-                border-radius: 50%;
-                background: #4CAF50;
-                cursor: pointer;
-            }
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -92,7 +92,8 @@
 
 <div id="menu">
     <span id="hamburger" onclick="openBurger()">&#9776;</span>
-    <input id="pac-input" class="controls" type="text" placeholder="  &#x1F50D; Your Position" onfocus="this.placeholder = ''" onblur="this.placeholder ='  &#x1F50D; Your Position'">
+    <input id="pac-input" class="controls" type="text" placeholder="@Session["sessioncity"]" onfocus="this.placeholder = ''" onblur="this.placeholder ='@Session["sessioncity"]'">
+    <img src="~/Images/MagnifyingGlass_Icon.png" id="MagGlass"/>
 </div>
 <script>
     $("#hamburger").click(function () {

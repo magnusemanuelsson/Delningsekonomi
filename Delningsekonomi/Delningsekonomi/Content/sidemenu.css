@@ -49,13 +49,24 @@
     background-color: #fff;
     font-family: Roboto;
     font-size: 4vh;
-    width: calc(100% - 11vh - 2vh);
+    width: calc(100% - 11vh - 2vh - 6vh);
     padding: 0;
     padding-left: 2vh;
+    padding-right: 6vh;
     margin: 1vh 0;
     height: 8vh;
     border: none;
     border-radius: 1vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#MagGlass {
+   width: 6vh;
+   height: 6vh;
+   position: fixed;
+   right: 2vh;
+   top: 2vh;
 }
 
 
