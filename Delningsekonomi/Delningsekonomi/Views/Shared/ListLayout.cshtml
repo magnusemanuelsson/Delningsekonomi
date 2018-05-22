@@ -46,16 +46,38 @@
             border-top: solid 0.25vh;
             border-color: lightgray;
             height: 16vh;
+
+            position:relative;
+        }
+
+        .list_icon {
+            float:left;
+            display:inline-block;
+            width:20%;
+
+            position:absolute;
+            left:2%;
+            top:25%;
+        }
+
+        .list_icon img {
+            height: 8vh;
+            width: 8vh;
+            margin:auto;
         }
 
         .list_title {
             float: left;
             display: inline-block;
-            width: 75%;
-            height:25%;
+            width: 55%;
+            height:40%;
             overflow: hidden;
             font-size: 3vh;
             font-weight: bold;
+
+            position:absolute;
+            top:10%;
+            left:20%
         }
 
         .list_distance {
@@ -67,15 +89,24 @@
             text-align: right;
             font-size: 3vh;
             font-weight: bold;
+            
+            position:absolute;
+            top:10%;
+            right:5%
         }
 
         .list_desc {
             float: left;
             display: inline-block;
-            width: 75%;
+            height: 50%;
+            width: 55%;
             max-height: 75%;
             overflow: hidden;
             font-size: calc(1vw + 1vh + 1vmin);
+
+            position: absolute;
+            bottom: 0%;
+            left: 20%
         }
 
         .list_img img {
@@ -83,6 +114,10 @@
             display: inline-block;
             max-height: 12vh;
             max-width: 20vw;
+
+            position: absolute;
+            bottom: 20%;
+            right: 5%
         }
     </style>
 </head>

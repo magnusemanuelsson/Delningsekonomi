@@ -27,6 +27,11 @@ namespace GMapsAPITest.Models
     {
         [JsonProperty("resources")]
         public List<Resource> resources { get; set; }    
+
+        public PointJSON()
+        {
+            resources = new List<Resource>();
+        }
     }
 
     public class Resource
@@ -44,7 +49,11 @@ namespace GMapsAPITest.Models
 
         public string Distance { get; set; }
 
-
+        public Resource()
+        {
+            Location = new Location();
+            Tags = new List<string>();
+        }
     }
 
     public class Location

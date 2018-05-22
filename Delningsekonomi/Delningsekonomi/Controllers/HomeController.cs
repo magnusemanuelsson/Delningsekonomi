@@ -19,7 +19,29 @@ namespace Delningsekonomi.Controllers
     public class HomeController : Controller
     {
         private PointsAPI service = new PointsAPI();
-        private List<string> filterList = new List<string>();
+        static List<string> filterList;
+
+        public HomeController()
+        {
+            if (filterList == null)
+            {
+                RedirectToAction("Start");
+            }
+        }
+
+        public ActionResult Start()
+        {
+            filterList = new List<string>();
+            SetFilter("Orange", true);
+            SetFilter("Blue", true);
+            SetFilter("Buy", true);
+            SetFilter("Rent", true);
+            SetFilter("Service", true);
+            SetFilter("Food", true);
+            SetFilter("Vehicle", true);
+            SetFilter("Misc", true);
+            return View();
+        }
 
         public async Task<ActionResult> Index(string city2, string cityLat, string cityLng)
         {
@@ -53,7 +75,8 @@ namespace Delningsekonomi.Controllers
                 Session["sessioncity"] = city2;
             }
 
-            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius, filterList);
+            PointJSON unfilteredList = await service.GetPoints(cityLat, cityLng, radius, new List<string>());
+            PointJSON pointsList = GetFilteredList(unfilteredList);
 
             MapPoints mapPoints = new MapPoints(pointsList.resources.Count);
 
@@ -122,7 +145,8 @@ namespace Delningsekonomi.Controllers
                 Session["sessionlng"] = cityLng;
                 Session["sessioncity"] = city2;
             }
-            PointJSON pointsList = await service.GetPoints(cityLat, cityLng, radius , null);
+            PointJSON unfilteredList = await service.GetPoints(cityLat, cityLng, radius , new List<string>());
+            PointJSON pointsList = GetFilteredList(unfilteredList);
             System.Diagnostics.Debug.WriteLine(pointsList);
 
             foreach (Resource item in pointsList.resources)
@@ -308,6 +332,77 @@ namespace Delningsekonomi.Controllers
                     filterList.Remove(name);
                 }
             }
+        }
+
+        [HttpPost]
+        public ActionResult FilterPostlist(bool Orange, bool Blue, bool Buy, bool Rent, bool Service, bool Food, bool Vehicle, bool Misc)
+        {
+            SetFilter(nameof(Orange), Orange);
+            SetFilter(nameof(Blue), Blue);
+            SetFilter(nameof(Buy), Buy);
+            SetFilter(nameof(Rent), Rent);
+            SetFilter(nameof(Service), Service);
+            SetFilter(nameof(Food), Food);
+            SetFilter(nameof(Vehicle), Vehicle);
+            SetFilter(nameof(Misc), Misc);
+
+            return RedirectToAction("ListView");
+        }
+
+        public PointJSON GetFilteredList(PointJSON inputlist)
+        {
+            PointJSON list1 = new PointJSON();
+
+            foreach(Resource resource in inputlist.resources)
+            {
+                if (filterList.Contains("Orange") && resource.Tags.Contains("Orange"))
+                {
+                    list1.resources.Add(resource);
+                }
+                if (filterList.Contains("Blue") && resource.Tags.Contains("Blue"))
+                {
+                    list1.resources.Add(resource);
+                }
+            }
+
+            PointJSON list2 = new PointJSON();
+
+            foreach (Resource resource in list1.resources)
+            {
+                if (filterList.Contains("Buy") && resource.Tags.Contains("Buy"))
+                {
+                    list2.resources.Add(resource);
+                }
+                if (filterList.Contains("Rent") && resource.Tags.Contains("Rent"))
+                {
+                    list2.resources.Add(resource);
+                }
+                if (filterList.Contains("Service") && resource.Tags.Contains("Service"))
+                {
+                    list2.resources.Add(resource);
+                }
+            }
+
+            PointJSON list3 = new PointJSON();
+
+            foreach (Resource resource in list2.resources)
+            {
+                if (filterList.Contains("Food") && resource.Tags.Contains("Food"))
+                {
+                    list3.resources.Add(resource);
+                }
+                if (filterList.Contains("Vehicle") && resource.Tags.Contains("Vehicle"))
+                {
+                    list3.resources.Add(resource);
+                }
+                if (filterList.Contains("Misc") && resource.Tags.Contains("Misc"))
+                {
+                    list3.resources.Add(resource);
+                }
+            }
+
+
+            return list3;
         }
     }
 }

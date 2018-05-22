@@ -7,9 +7,6 @@
     Layout = "~/Views/Shared/listLayout.cshtml";
 }
 @Html.Partial("Topmenu")
-@Html.Partial("Bottommenulist")
-
-
 
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "form", id = "form" }))
 {
@@ -21,48 +18,84 @@
 <div id="list_content" class="list_content">
     @foreach (var item in Model)
     {
-    <div id="list" class="list">
-        <div class="list_title">
-            @Html.DisplayFor(itemModel => item.Title)
-        </div>
-        <div class="list_distance" id="distext">
-            @Html.DisplayFor(itemModel => item.Distance)
-        </div>
-        <br />
-        <div class="list_desc">
-            @Html.DisplayFor(itemModel => item.Description)
-        </div>
-        <div class="list_img">
-            <img src="@Html.DisplayFor(itemModel => item.Image)" />
-        </div>
-        <div class="list_tags">
-            @Html.DisplayFor(itemModel => item.Tags)
-        </div>
-
         <script>
-            document.getElementById("distext").id = "distext" + counter;
-            var textbox = document.getElementById("distext" + counter);
-            var value = Math.round(parseFloat(textbox.innerHTML));
-            if (value > 1000) {
-                textbox.innerHTML = value / 1000 + "km";
-            } else {
-                textbox.innerHTML = value + "m";
-            }
-            counter++;
+            var icon_url = "/Images/Pins/" + "@Html.DisplayFor(itemModel => item.Tags)" + ".png";
         </script>
+        <div id="list" class="list">
+            <div class="list_icon">
+                <img src="/Images/Pins/@(Html.DisplayFor(itemModel => item.Tags)).png" />
+            </div>
+            <div class="list_title">
+                @Html.DisplayFor(itemModel => item.Title)
+            </div>
+            <div class="list_distance" id="distext">
+                @Html.DisplayFor(itemModel => item.Distance)
+            </div>
+            <br />
+            <div class="list_desc">
+                @Html.DisplayFor(itemModel => item.Description)
+            </div>
+            <div class="list_img">
+                <img src="@Html.DisplayFor(itemModel => item.Image)" />
+            </div>
 
-    </div>
+            <script>
+                document.getElementById("distext").id = "distext" + counter;
+                var textbox = document.getElementById("distext" + counter);
+                var value = Math.round(parseFloat(textbox.innerHTML));
+                if (value > 1000) {
+                    textbox.innerHTML = value / 1000 + "km";
+                } else {
+                    textbox.innerHTML = value + "m";
+                }
+                counter++;
+            </script>
+
+        </div>
     }
 </div>
 
 <div id="map" class="map"></div>
 
 <script src="~/Scripts/MapApp.js"></script>
-
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeZ0LKWiLMNWqQGI_L5lLzo8ZN9Sa8AHU&libraries=places,geometry&callback=initAutocomplete">
 </script>
 
+@using (Html.BeginForm("FilterPostList", "Home", FormMethod.Post, new { name = "filter", id = "filter" }))
+{
+    @Html.Partial("Bottommenulist")
+}
+<script>
+    function save_data() {
+        var checkboxes = document.getElementsByClassName("filterCheck");
+        [].forEach.call(checkboxes, function (element) {
+            if (element.checked) {
+                localStorage.setItem(element.id, true);
+            }
+            else {
+                localStorage.setItem(element.id, false);
+            }
+        });
+        console.log("Saving Form");
+    }
 
+    function load_data() {
+        var checkboxes = document.getElementsByClassName("filterCheck");
+        [].forEach.call(checkboxes, function (element) {
+            if (localStorage.getItem(element.id) != null) {
+                if (localStorage.getItem(element.id) == "true") {
+                    element.checked = true;
+                }
+                else {
+                    element.checked = false;
+                }
+            }
+        });
+        console.log("Loading form");
+    }
+
+    load_data();
+
+</script>
 

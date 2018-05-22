@@ -86,7 +86,117 @@ $(document).ready(function () {
 
         .submenu {
             clear: both;
+            background-color: dimgray;
+            color: white;
             display: none;
+            padding-left: 4vh;
+            padding-top: 1vh;
+        }
+
+        /* Start Custom checkbox */
+        .container {
+            width:33%;
+            display: inline-block;
+            position: relative;
+            padding-left: 3.5vh;
+            margin-bottom: 1vh;
+            cursor: pointer;
+            font-family: Roboto, sans-serif;
+            font-size: 2.5vh;
+            font-weight: lighter;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .container img {
+            width: 3vh;
+            height: 3vh;
+            vertical-align: top;
+        }
+
+        #containerOrange, #containerBlue {
+            width: calc(50vw - 3.5vh - 3vh - 2vh);
+        }
+
+        #containerBuy, #containerRent, #containerService {
+            width: calc(33vw - 3.5vh - 3vh - 2vh);
+        }
+
+        /* Hide the browser's default checkbox */
+        .filterCheck {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3vh;
+            width: 3vh;
+            background-color: #eee;
+            border-radius: 0.5vh;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .filterCheck:hover ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .filterCheck:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .filterCheck:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 0.95vh;
+            top: 0.35vh;
+            width: 0.75vh;
+            height: 1.5vh;
+            border: solid white;
+            border-width: 0 0.5vh 0.5vh 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        #saveDiv {
+            left: 0;
+            width: calc(100vw - 8vh);
+            text-align: center;
+            padding-bottom: 2vh;
+        }
+
+        #SaveButton {
+            font-size: 3vh;
+            font-weight: lighter;
+            background-color: gray;
+            border: none;
+            color: white;
+            padding: 1vh 1vh;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            width: 30vw;
+            margin: auto 1vh;
+            cursor: pointer;
         }
     </style>
     <div id="jquerytests2">
@@ -118,28 +228,54 @@ $(document).ready(function () {
             tids-filter
         </div>
         <div id="cat_hidden" class="submenu">
-            <input type="checkbox" id="filter_orange" class="filterCheck" name="Orange" value="true" /> Offers
-            <input type="hidden" name="Orange" value="false" />
-            <input type="checkbox" id="filter_blue" class="filterCheck" name="Blue" value="true" /> Requests
-            <input type="hidden" name="Blue" value="false" />
+            <label id="containerOrange" class="container">
+                <input type="checkbox" id="filter_orange" class="filterCheck" name="Orange" value="true" /><text>Offers</text>
+                <span class="checkmark"></span>
+                <input type="hidden" name="Orange" value="false" />
+            </label>
+            <label id="containerBlue" class="container">
+                <input type="checkbox" id="filter_blue" class="filterCheck" name="Blue" value="true" /><text>Requests</text>
+                <span class="checkmark"></span>
+                <input type="hidden" name="Blue" value="false" />
+            </label>
             <br />
-            <input type="checkbox" id="filter_buy" class="filterCheck" name="Buy" value="true" /> Buy & Sell
-            <input type="hidden" name="Buy" value="false" />
-            <input type="checkbox" id="filter_rent" class="filterCheck" name="Rent" value="true" /> Rent
-            <input type="hidden" name="Rent" value="false" />
-            <input type="checkbox" id="filter_service" class="filterCheck" name="Service" value="true" /> Service
-            <input type="hidden" name="Service" value="false" />
+            <label id="containerBuy" class="container">
+                <input type="checkbox" id="filter_buy" class="filterCheck" name="Buy" value="true" /> <img src="~/Images/Pins/Buy.png" alt="Buy/Sell">
+                <span class="checkmark"></span>
+                <input type="hidden" name="Buy" value="false" />
+            </label>
+            <label id="containerRent" class="container">
+                <input type="checkbox" id="filter_rent" class="filterCheck" name="Rent" value="true" /> <img src="~/Images/Pins/Rent.png" alt="Rent">
+                <span class="checkmark"></span>
+                <input type="hidden" name="Rent" value="false" />
+            </label>
+            <label id="containerService" class="container">
+                <input type="checkbox" id="filter_service" class="filterCheck" name="Service" value="true" /> <img src="~/Images/Pins/Service.png" alt="Service">
+                <span class="checkmark"></span>
+                <input type="hidden" name="Service" value="false" />
+            </label>
             <br />
-            <input type="checkbox" id="filter_food" class="filterCheck" name="Food" value="true" /> Food
-            <input type="hidden" name="Food" value="false" />
+            <label class="container">
+                <input type="checkbox" id="filter_food" class="filterCheck" name="Food" value="true" /><img src="~/Images/Pins/Food.png" alt="Food" class="cat_img"><text> Food</text>
+                <span class="checkmark"></span>
+                <input type="hidden" name="Food" value="false" />
+            </label>
             <br />
-            <input type="checkbox" id="filter_vehicle" class="filterCheck" name="Vehicle" value="true" /> Vehicle
-            <input type="hidden" name="Vehicle" value="false" />
+            <label class="container">
+                <input type="checkbox" id="filter_vehicle" class="filterCheck" name="Vehicle" value="true" /> <img src="~/Images/Pins/Vehicle.png" alt="Vehicle"><text> Vehicle</text>
+                <span class="checkmark"></span>
+                <input type="hidden" name="Vehicle" value="false" />
+            </label>
             <br />
-            <input type="checkbox" id="filter_misc" class="filterCheck" name="Misc" value="true" /> Misc
-            <input type="hidden" name="Misc" value="false" />
+            <label class="container">
+                <input type="checkbox" id="filter_misc" class="filterCheck" name="Misc" value="true" /> <img src="~/Images/Pins/Misc.png" alt="Misc"><text> Misc</text>
+                <span class="checkmark"></span>
+                <input type="hidden" name="Misc" value="false" />
+            </label>
             <br />
-            <input type="submit" value="Save" onclick="save_data()" />
+            <div id="saveDiv">
+                <input type="submit" value="Save" id="SaveButton" onclick="save_data()" />
+            </div>
         </div>
     </div>
 

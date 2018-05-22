@@ -45,12 +45,41 @@
             background: #4CAF50;
             cursor: pointer;
         }
+
+        .panel {
+            background-color: darkgray;
+            padding-top:1vh;
+            padding-bottom:1vh;
+        }
+
+        .panel .form-control {
+            display: inline-block;
+        }
+
+        .panel .form-control input {
+            height: 3.5vh;
+            border: none;
+        }
+
+        .panel .btn-primary {
+            font-family: Roboto, sans-serif;
+            font-weight: lighter;
+            background-color: gray;
+            border: none;
+            color: white;
+            padding: 1vh 1vh;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: auto 1vh;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <div id="mySidenav" class="sidenav">
     <div id="toplogin">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeBurger()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn">&times;</a>
         <div id="avatardiv">
             <img src="~/Images/avatar.png" alt="Avatar" class="avatar">
         </div>
@@ -91,7 +120,7 @@
 
 
 <div id="menu">
-    <span id="hamburger" onclick="openBurger()">&#9776;</span>
+    <span id="hamburger"><img src="~/Images/Hamburger.png" alt="Hamburger" class="hamburgerimg"></span>
     <input id="pac-input" class="controls" type="text" placeholder="@Session["sessioncity"]" onfocus="this.placeholder = ''" onblur="this.placeholder ='@Session["sessioncity"]'">
     <img src="~/Images/MagnifyingGlass_Icon.png" id="MagGlass"/>
 </div>

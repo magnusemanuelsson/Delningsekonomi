@@ -135,9 +135,6 @@ function sanitizeHTML(strings) {
 }
 
 var map;
-var bounds;
-
-
 
 function initMap() {
     
@@ -154,7 +151,20 @@ function initMap() {
         fullscreenControl: false
     });
 
-    bounds = new google.maps.LatLngBounds();
+    // Attempt to handle markers with exact same coordinates
+    /*
+    var ofs = new OverlappingFeatureSpiderfier(map.data, { markersWontMove: true, markersWontHide: true, keepSpiderfied: true });
+
+    ofs.addListener("click", function (event) {
+        var theFeatureThatWasClicked = event.feature;
+        alert('clicked marker ' + theFeatureThatWasClicked.getProperty("title"));
+    });
+
+    ofs.addListener('spiderfy', function (features) {
+    });
+    ofs.addListener('unspiderfy', function (features) {
+    });
+    */
 
     var centerCircle = new google.maps.Circle({
         center: new google.maps.LatLng(currentLat, currentLong),
@@ -183,52 +193,8 @@ function initMap() {
     });
 
     map.fitBounds(centerCircle.getBounds());
-
-    var markerClusterer = new MarkerClusterer(null, null, {
-        imagePath: "https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"
-    });
-    minClusterZoom = 14;
-    markerClusterer.setMaxZoom(minClusterZoom);
-
-    var oms = new OverlappingMarkerSpiderfier(map, {
-        markersWontMove: true,
-        markersWontHide: true,
-        basicFormatEvents: true
-    });
-
-
-    markerClusterer.setMap(map);
-
-
-    google.maps.event.addListener(map.data, 'addfeature', function (e) {
-        if (e.feature.getGeometry().getType() === 'Point') {
-            var marker = new google.maps.Marker({
-                position: e.feature.getGeometry().get(),
-                title: e.feature.getProperty('name'),
-                map: map
-            });
-            google.maps.event.addListener(marker, 'click', function (marker, e) {
-                return function () {
-
-                    var myHTML = e.feature.getProperty('name');
-                    boxText.innerHTML = "<div style='text-align: center;'><b>" + myHTML + "</b></div>";
-                    infobox.setPosition(e.feature.getGeometry().get());
-                    infobox.setOptions({
-                        pixelOffset: new google.maps.Size(0, 0)
-                    });
-                    infobox.open(map);
-                };
-            }(marker, e));
-            markerClusterer.addMarker(marker);
-            oms.addMarker(marker);
-
-            bounds.extend(e.feature.getGeometry().get());
-            map.fitBounds(bounds);
-            map.setCenter(e.feature.getGeometry().get());
-        }
-    });
-            // Load the stores GeoJSON onto the map.
-    // map.data.loadGeoJson('Scripts/points.json');
+    
+    // Load the stores GeoJSON onto the map.
     map.data.addGeoJson(myAPIpoints);
 
     // Define the custom marker icons, using the store's "category".
@@ -245,27 +211,22 @@ function initMap() {
     var maxWidthResponsive = 100;
     const infoWindow = new google.maps.InfoWindow();
 
-
     infoWindow.setOptions({ pixelOffset: new google.maps.Size(0, -64) });
 
-    
-
     // Show the information for a store when its marker is clicked.
-    map.data.addListener('spider_click', event => {
+    map.data.addListener('click', event => {
 
         const category = event.feature.getProperty('category');
         const name = event.feature.getProperty('name');
         const description = event.feature.getProperty('description');
-        const hours = event.feature.getProperty('hours');
-        const phone = event.feature.getProperty('phone');
+        //const hours = event.feature.getProperty('hours');
+        //const phone = event.feature.getProperty('phone');
         
         const position = event.feature.getGeometry().get();
         //<img style="float:left; width:64px;  margin-top:30px" src="Images/${category}.png">
         const content = sanitizeHTML`
             <div id="tooltip" style="margin-left:24px; margin-bottom:20px;">
-            <h2>${name}</h2><p>${description}</p>
-            <p><b>Open:</b> ${hours}<br/><b>Phone:</b> ${phone}</p>
-<button onclick="zindexFunction()"> -> </button>
+            <h2>${name}</h2><p>${description}</p> 
             </div>
             `;
 
@@ -278,6 +239,10 @@ function initMap() {
 
     google.maps.event.addDomListener(window, 'resize', function () {
         infoWindow.open(map);
+    });
+
+    google.maps.event.addListener(map, "click", function () {
+        infoWindow.close();
     });
 }
 

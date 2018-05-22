@@ -162,6 +162,7 @@
     <Content Include="Images\avatar.png" />
     <Content Include="Images\CarServiceOffered.png" />
     <Content Include="Images\CarServiceWanted.png" />
+    <Content Include="Images\Logo.png" />
     <Content Include="Images\filterikon.png" />
     <Content Include="Images\FoodPurchaseOffered.png" />
     <Content Include="Images\kartaikon.png" />
@@ -184,6 +185,7 @@
     <Content Include="Scripts\MapApp.js" />
     <Content Include="Scripts\markerclusterer.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\OverlappingFeatureSpiderfier.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\spider.min.js" />
@@ -208,6 +210,7 @@
     <Content Include="Views\Home\ListView.cshtml" />
     <Content Include="Views\Shared\ListLayout.cshtml" />
     <Content Include="Views\Shared\Bottommenulist.cshtml" />
+    <Content Include="Views\Home\Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

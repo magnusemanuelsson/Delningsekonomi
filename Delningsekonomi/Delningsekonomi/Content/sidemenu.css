@@ -45,6 +45,12 @@
     font-weight: bolder;
 }
 
+.hamburgerimg {
+    margin-top: 0.5vh;
+    width:7vh;
+    height:7vh;
+}
+
 #pac-input {
     background-color: #fff;
     font-family: Roboto;
@@ -104,6 +110,7 @@
     width: 10vh;
     font-size: 10vh;
     color: lightgray;
+    padding: 0;
 }
 .sidenav .closebtn:hover {
     color: white;

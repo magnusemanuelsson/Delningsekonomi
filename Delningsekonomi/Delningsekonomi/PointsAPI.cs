@@ -30,12 +30,17 @@ namespace GMapsAPITest
                 string tagsStr = "";
                 foreach(string tag in tags)
                 {
-                    tagsStr += (tag + ",");
+                    tagsStr += (tag + ",+");
                 }
+                tagsStr = tagsStr.TrimEnd('+');
                 tagsStr = tagsStr.TrimEnd(',');
                 string test = uri + "?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance + "&tags=" + tagsStr;
                 string apistr = await httpClient.GetStringAsync(uri + "?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance + "&tags=" + tagsStr);
                 var returnval = JsonConvert.DeserializeObject<PointJSON>(apistr);
+                if (tags.Contains(""))
+                {
+                    tags.Remove("");
+                }
                 return returnval;
                 
                 /*
