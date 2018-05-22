@@ -135,12 +135,16 @@ function sanitizeHTML(strings) {
 }
 
 var map;
-var bounds;
+
 
 
 
 function initMap() {
-    
+    var markerClusterer = new MarkerClusterer(null, null, {
+        imagePath: "https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"
+    });
+    minClusterZoom = 14;
+    markerClusterer.setMaxZoom(minClusterZoom);
     // Create the map.
     map = new google.maps.Map(document.getElementsByClassName('map')[0], {
         zoom: 14,
@@ -153,8 +157,6 @@ function initMap() {
         rotateControl: false,
         fullscreenControl: false
     });
-
-    bounds = new google.maps.LatLngBounds();
 
     var centerCircle = new google.maps.Circle({
         center: new google.maps.LatLng(currentLat, currentLong),
@@ -183,12 +185,6 @@ function initMap() {
     });
 
     map.fitBounds(centerCircle.getBounds());
-
-    var markerClusterer = new MarkerClusterer(null, null, {
-        imagePath: "https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m"
-    });
-    minClusterZoom = 14;
-    markerClusterer.setMaxZoom(minClusterZoom);
 
     var oms = new OverlappingMarkerSpiderfier(map, {
         markersWontMove: true,
@@ -331,7 +327,6 @@ function getDistance() {
         return d; // returns the distance in meter
     };
 }
-
 /*
  OverlappingMarkerSpiderfier
 https://github.com/jawj/OverlappingMarkerSpiderfier
